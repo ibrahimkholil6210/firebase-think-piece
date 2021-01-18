@@ -21,20 +21,12 @@ class Application extends Component {
     this.unsubscribe();
   }
 
-  handleCreate = async (post) => {
-    await firestore.collection("posts").add(post);
-  };
-
-  handleDelete = async (id) => {
-    await firestore.collection("posts").doc(id).delete();
-  };
-
   render() {
     const { posts } = this.state;
     return (
       <main className='Application'>
         <h1>Think Piece</h1>
-        <Posts posts={posts} onCreate={this.handleCreate} onDelete={this.handleDelete} />
+        <Posts posts={posts} />
       </main>
     );
   }
