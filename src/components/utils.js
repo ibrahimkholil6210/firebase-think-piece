@@ -1,3 +1,3 @@
 export const collectIdsAndDocs = (doc) => {
-  return { id: doc.id, data: doc.data() };
+  return { id: doc.id, ...doc.data() };
 };

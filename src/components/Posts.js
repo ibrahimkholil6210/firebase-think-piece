@@ -1,14 +1,16 @@
-import React from 'react'
-import Post from './Post';
-import AddPost from './AddPost';
+import React from "react";
+import Post from "./Post";
+import AddPost from "./AddPost";
 
-const Posts = ({ posts, onCreate }) => {
+const Posts = ({ posts, onCreate, onDelete }) => {
   return (
-    <section className="Posts">
+    <section className='Posts'>
       <AddPost onCreate={onCreate} />
-      {posts.map(post => <Post {...post} key={post.id} />)}
+      {posts.map((post) => {
+        return <Post {...post} key={post.id} onDelete={onDelete} />;
+      })}
     </section>
-  )
-}
+  );
+};
 
 export default Posts;
