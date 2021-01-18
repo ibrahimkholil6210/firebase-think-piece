@@ -7,6 +7,8 @@ const Post = ({ id, title, content, user, createdAt, stars, comments }) => {
 
   const remove = () => postRef.delete();
 
+  const star = () => postRef.update({ stars: stars * 1 + 1 });
+
   return (
     <article className='Post'>
       <div className='Post--content'>
@@ -31,7 +33,9 @@ const Post = ({ id, title, content, user, createdAt, stars, comments }) => {
           <p>{moment(createdAt).calendar()}</p>
         </div>
         <div>
-          <button className='star'>Star</button>
+          <button className='star' onClick={star}>
+            Star
+          </button>
           <button className='delete' onClick={remove}>
             Delete
           </button>

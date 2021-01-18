@@ -1,12 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import CurrentUser from './CurrentUser';
-import SignInAndSignUp from './SignInAndSignUp';
+import CurrentUser from "./CurrentUser";
+import SignInAndSignUp from "./SignInAndSignUp";
 
-const Authentication = ({ user, loading }) => {
-  if (loading) return null;
-
-  return <div>{user ? <CurrentUser /> : <SignInAndSignUp />}</div>;
+const Authentication = ({ user }) => {
+  console.log(user);
+  return <div>{user ? <CurrentUser {...user} /> : <SignInAndSignUp />}</div>;
 };
 
 export default Authentication;
