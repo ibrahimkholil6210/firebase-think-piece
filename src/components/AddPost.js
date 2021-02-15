@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { firestore, auth } from "../config/firebase";
+import { UserContext } from "../providers/UserProvider";
 
 class AddPost extends Component {
+  static contextType = UserContext;
   state = { title: "", content: "" };
 
   handleChange = (event) => {
@@ -43,11 +45,12 @@ class AddPost extends Component {
 
   render() {
     const { title, content } = this.state;
+    const user = this.context;
     return (
       <form onSubmit={this.handleSubmit} className='AddPost'>
         <input type='text' name='title' placeholder='Title' value={title} onChange={this.handleChange} />
         <input type='text' name='content' placeholder='Body' value={content} onChange={this.handleChange} />
-        <input className='create' type='submit' value='Create Post' />
+        {user && <input className='create' type='submit' value='Create Post' />}
       </form>
     );
   }

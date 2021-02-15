@@ -4,7 +4,6 @@ import { firestore, auth } from "../config/firebase";
 
 const Post = ({ id, title, content, user, createdAt, stars, comments }) => {
   const postRef = firestore.collection("posts").doc(id);
-
   const remove = () => postRef.delete().catch((err) => console.log(err));
   const star = () => postRef.update({ stars: stars * 1 + 1 });
 
@@ -37,11 +36,11 @@ const Post = ({ id, title, content, user, createdAt, stars, comments }) => {
           <button className='star' onClick={star}>
             Star
           </button>
-          {user.uid === uid ? (
+          {user.uid === uid && (
             <button className='delete' onClick={remove}>
               Delete
             </button>
-          ) : null}
+          )}
         </div>
       </div>
     </article>
