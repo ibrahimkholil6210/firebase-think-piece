@@ -1,5 +1,5 @@
 import React, { Component, createRef } from "react";
-import { auth, firestore } from "../config/firebase";
+import { auth, firestore, storage } from "../config/firebase";
 
 class UserProfile extends Component {
   state = {
@@ -14,6 +14,10 @@ class UserProfile extends Component {
 
   get userRef() {
     return firestore.collection("users").doc(this.uid);
+  }
+
+  get file() {
+    return this.imageRef && this.imageRef.files[0];
   }
 
   handleChange = (e) => {
@@ -32,6 +36,17 @@ class UserProfile extends Component {
       } catch (err) {
         console.log(err.message);
       }
+    }
+    if (this.file) {
+      storage
+        .ref()
+        .child("user-profiles")
+        .child(this.uid)
+        .child(this.file.name)
+        .put(this.file)
+        .then((res) => res.ref.getDownloadURL())
+        .then((photoURL) => this.userRef.update({ photoURL }))
+        .catch((err) => console.log(err.message));
     }
   };
 
